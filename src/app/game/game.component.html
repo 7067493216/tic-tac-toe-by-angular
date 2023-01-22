@@ -1,0 +1,138 @@
+<div class="outer-cont">
+    <!-- <h5 *ngIf="!submitted">Please confirm the player</h5> -->
+    <button *ngIf=" !invalidData" type="button" class="btn btn-primary open-popup-button" (click)="openPopup()">Start
+        Game
+    </button>
+    <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+
+        <div class="modal-dialog modal-dialog-cont" role="document">
+            <div class="modal-content modal-content-cont">
+                <div class="main-cont-div">
+                    <div>
+                        <div class="close-popup-div">
+                            <button class="close-popup-button" type="button" class="close" aria-label="Close">
+                                <span (click)="closePopup()" aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    </div>
+                    <form [formGroup]="playerForm">
+                        <div *ngIf="freshPage">
+                            <label class="player1-label-cont">player1<span class="text-danger"
+                                    style="color: crimson;">*</span></label>
+                            <input type="text" class="player1-input" formControlName="player1"
+                                [ngClass]="{'is-invalid':submitted && v['player1'].errors}">
+                            <div *ngIf="submitted  && v['player1'].errors" class="alert-error">
+                                <div *ngIf="submitted && v['player1'].errors['required'] " class="alert-error"
+                                    style="color: crimson;">
+                                    player1 is required
+                                </div>
+                            </div>
+                            <label class="player2-label">player2<span class="text-danger"
+                                    style="color: crimson;">*</span></label>
+                            <input type="text" class="player2-input-field" formControlName="player2"
+                                [ngClass]="{'is-invalid':submitted && v['player2'].errors}">
+                            <div *ngIf="submitted  && v['player2'].errors" class="alert-error">
+                                <div *ngIf="submitted && v['player2'].errors['required'] " class="alert-error"
+                                    style="color: crimson;">
+                                    player2 is required
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary submit-form-button"
+                                (click)="submitForm($event)">submit</button>
+                            <!-- <table
+                                style="height: 50px; background-color: linear-gradient(to bottom left, #ece8f4 0%, #5803ac 100%) ; font-size: 20px;">
+                                <tr *ngFor="let data of userdata">
+                                    <td>player1: {{data.player1}} </td>
+                                    <br>
+                                    <td> , </td>
+                                    <br>
+                                    <td>player2: {{data.player2}} </td>
+                                </tr>
+                            </table> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2 *ngIf="freshPage"> let's play Tic-Tac-Toe </h2>
+    <h1 *ngIf="!winner && !isDraw && !freshPage">
+        <p>Curren player: {{(player=='x'? name1 :name2 )}}</p>
+    </h1>
+    <h2 *ngIf="winner ">player {{(winner=='x'? name1 :name2)}} won!</h2>
+    <h2 *ngIf="isDraw">Draw!!</h2>
+    <button *ngIf="freshPage && invalidData" (click)="newGame()">Start game</button>
+    <main *ngIf="!winner && !isDraw">
+        <app-board *ngFor="let value of squares; let i =index;" [value]="value" (click)="makeMove(i)"></app-board>
+    </main>
+</div>
+
+
+<!-- <div>
+        <form [formGroup]="playerForm">
+            <div *ngIf="freshPage">
+                <label
+                    style="font-size: 30px;font-family: 'Courier New', Courier, monospace; color: black;">player1<span
+                        class="text-danger" style="color: crimson;">*</span> : </label>
+                <input type="text"
+                    style="height: 30px; width: 250px; border: hidden; border-radius: 15px; font-size: 25px;outline: hidden;"
+                    formControlName="player1">
+                <br>
+                <label
+                    style="font-size: 30px;font-family: 'Courier New', Courier, monospace; color: black;">player2<span
+                        class="text-danger" style="color: crimson;">*</span> : </label>
+                <input type="text"
+                    style="height: 30px; width: 250px; border: hidden; border-radius: 15px; font-size: 25px;outline: hidden;"
+                    formControlName="player2">
+
+                <button type="submit"
+                    style="height: 40px; width: 100px; justify-content: center; align-items: center;padding: 5px;"
+                    (click)="submitForm($event)">submit</button>
+
+
+                <table
+                    style="height: 50px; background-color: linear-gradient(to bottom left, #ece8f4 0%, #5803ac 100%) ; font-size: 20px;">
+                    <tr *ngFor="let data of userdata">
+                        <td>player1: {{data.player1}} </td>
+                        <br>
+                        <td> , </td>
+                        <br>
+                        <td>player2: {{data.player2}} </td>
+                    </tr>
+                </table>
+            </div>
+        </form>
+    </div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
